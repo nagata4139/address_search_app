@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, request
 
 app = Flask(__name__)
 
@@ -10,9 +10,11 @@ def top():
 def main():
     app.run(debug=True)
 
-@app.route("/address_search_app/<string:zcode>")
-def address_search_app(zcode:str):
-    return "test"
+@app.route("/address_search_app")
+def address_search_app():
+    zcode = request.args.get("zipcode")
+
+    return f"住所検索 {zcode=}"
 
 if __name__ == '__main__':
     main()
