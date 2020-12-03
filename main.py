@@ -12,7 +12,7 @@ def main():
 
 @app.route("/address_search_app/<string:zcode>")
 def address_search_app(zcode:str):
-    return
+    return "test"
 
 if __name__ == '__main__':
     main()
