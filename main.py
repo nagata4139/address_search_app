@@ -1,4 +1,5 @@
 from flask import Flask, request
+import requests
 
 app = Flask(__name__)
 
@@ -14,7 +15,15 @@ def main():
 def address_search_app():
     zcode = request.args.get("zipcode")
 
-    return f"住所検索 {zcode=}"
+    url = "https://zipcloud.ibsnet.co.jp/api/search?zipcode=" + zcode
+    res = requests.get(url)
+    resinfo = res.json()
+
+    # 住所を抽出し値を戻す
+    for info in resinfo["results"]:
+        address = info["address1"] + info["address2"] + info["address3"]
+
+    return f"{address}"
 
 if __name__ == '__main__':
     main()
