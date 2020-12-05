@@ -1,5 +1,5 @@
-from flask import Flask, request
 import requests
+from flask import Flask, request
 
 app = Flask(__name__)
 
@@ -15,6 +15,7 @@ def main():
 def address_search_app():
     zcode = request.args.get("zipcode")
 
+    # 郵便番号をもとに住所情報を取得
     url = "https://zipcloud.ibsnet.co.jp/api/search?zipcode=" + zcode
     res = requests.get(url)
     resinfo = res.json()
